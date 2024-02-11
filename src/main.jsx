@@ -16,7 +16,7 @@ import StateWise from "./StateWise.jsx"
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-     
+     <Route path="" element={<App/>} />
       <Route path="weather-info" element={<Weather/>} />
       <Route path="state-wise-info" element={<StateWise/>} />
      
