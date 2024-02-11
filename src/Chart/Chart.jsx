@@ -30,7 +30,7 @@ function Chart({city}) {
       
       {info &&
         info.list.map((data) => (
-          <div className="w-1/4 p-4">
+          <div className="w-1/1 p-4">
             <WeatherCard data={data} />
           </div>
         ))}

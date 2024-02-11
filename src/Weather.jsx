@@ -52,7 +52,7 @@ function Weather() {
         </div>
         {/* Add some margin */}
       </div>
-        <div className="ml-4 bg-cover" style={{backgroundImage:`url(${bglogo}`}}>
+        <div className="ml-1 bg-cover" style={{backgroundImage:`url(${bglogo}`}}>
           <Chart  city={city}/>
         </div>{" "}
 
