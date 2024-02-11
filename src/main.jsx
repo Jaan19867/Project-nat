@@ -19,13 +19,7 @@ const router = createBrowserRouter(
      
       <Route path="weather-info" element={<Weather/>} />
       <Route path="state-wise-info" element={<StateWise/>} />
-      <Route path="state-wise-info/newdelhi" element={<StateWise/>} />
-      <Route path="state-wise-info/kolkata" element={<StateWise/>} />
-      <Route path="state-wise-info/" element={<StateWise/>} />
-      <Route path="state-wise-info" element={<StateWise/>} />
-      <Route path="state-wise-info" element={<StateWise/>} />
-      <Route path="state-wise-info" element={<StateWise/>} />
-      <Route path="state-wise-info" element={<StateWise/>} />
+     
       
 
     </Route>
