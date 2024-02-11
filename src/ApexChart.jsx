@@ -50,9 +50,11 @@ export function ApexChart() {
     if (temperature >= 200) {
       color = "#FF0000" // Red for high temperature
     } else if (temperature >= 140) {
-      color = "#0000FF" // Blue for low temperature
+      color = "#00FF00" // Blue for low temperature
+    } else if (temperature >= 50) {
+      color = "#3492eb" // Blue for low temperature
     } else {
-      color = "#808080" // Grey for other temperatures
+      color = "#0000FF" // Grey for other temperatures
     }
 
     return {
