@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import ReactApexChart from "react-apexcharts"
 import Axios from "axios"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export function ApexChart() {
   const [info, setInfo] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [tooltipContent, setTooltipContent] = useState("")
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,6 @@ export function ApexChart() {
           "https://gist.githubusercontent.com/Jaan19867/94409f709fc77fcf484072fe1ccb46ed/raw/b080d939d57a91cf8d108c06fbac8a83ddb5deeb/stateinfo.json"
         )
         setInfo(response.data.states)
-        console.log(response.data.states)
         setLoading(false)
       } catch (error) {
         console.log("Error fetching data:", error)
@@ -28,17 +27,21 @@ export function ApexChart() {
     fetchData()
   }, [])
 
+  const navigateState = (state) => {
+    navigate(`/state/${state}`)
+  }
+
+  const handleChartClick = (event, chartContext, config) => {
+    const clickedState =
+      config.series[config.seriesIndex].data[config.dataPointIndex].x
+    console.log("Clicked State:", clickedState)
+    navigateState(clickedState)
+    alert(`You clicked on ${clickedState}!`)
+  }
+
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
   if (info.length === 0) return <div>No data available</div>
-
-
-  const handleChartClick = (event, chartContext, config) => {
-  
-    
-    alert(`You clicked on !`)
-  }
-
 
   const series = info.map((state) => {
     let color
@@ -61,16 +64,16 @@ export function ApexChart() {
           population: state.population,
           literacyRate: state.literacyRate,
           area: state.area,
-          fillcolor: color, // Set the color property
+          fillColor: color, // Set the color property
         },
       ],
     }
   })
+
   const options = {
     legend: {
       show: false,
     },
-
     plotOptions: {
       treemap: {
         colorScale: {
@@ -83,34 +86,17 @@ export function ApexChart() {
             {
               from: 148,
               to: 200,
-              color: " #FF007",
+              color: "#FF007",
             },
-
             {
               from: 200,
               to: 300,
               color: "#FF0000",
             },
           ],
-
-          onItemClick: {
-            toggleDataSeries: true,
-            handler: function (
-              event,
-              chartContext,
-              { dataPointIndex, seriesIndex, w }
-            ) {
-              const clickedState =
-                w.config.series[seriesIndex].data[dataPointIndex].x.props
-                  .children
-              console.log("Clicked State:", clickedState)
-              // Now you have access to the clicked state name
-            },
-          },
         },
       },
     },
-
     tooltip: {
       custom: function ({ series, seriesIndex, dataPointIndex, w }) {
         var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex]
@@ -150,9 +136,7 @@ export function ApexChart() {
           series={series}
           type="treemap"
           height={350}
-          onClick={(event, chartContext, config) =>
-            handleChartClick(event, chartContext, config)
-          }
+          onClick={handleChartClick}
         />
       </div>
       <div id="html-dist"></div>

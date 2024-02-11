@@ -3,6 +3,8 @@ import Axios from "axios"
 import City from "./component/City"
 import WeatherCard from "./component/WeatherCard"
 import Chart from "./Chart/Chart"
+import logo from "./assets/tree-desert-white-clouds-during-daytime_395237-190.avif"
+import bglogo from "./assets/3d-render-tree-landscape-against-night-sky_1048-5698.avif"
 // import Charts from "./Chart/Charts"
 
 function Weather() {
@@ -36,7 +38,7 @@ function Weather() {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen bg-cover" style={{backgroundImage:`url(${logo})`}} >
         <div className="max-w-lg w-full bg-white p-6 rounded-lg">
           <City city={city} setCity={setCity} />
           {isLoading ? (
@@ -45,12 +47,12 @@ function Weather() {
             <div className="text-red-500">{error}</div>
           ) : (
             <WeatherCard data={data} />
-          )}
+          ) }
           <div className="text-white">Hi how are you</div>
         </div>
         {/* Add some margin */}
       </div>
-        <div className="ml-4">
+        <div className="ml-4 bg-cover" style={{backgroundImage:`url(${bglogo}`}}>
           <Chart  city={city}/>
         </div>{" "}
 
